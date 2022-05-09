@@ -1,0 +1,2 @@
+const schema = {"$schema":"http://json-schema.org/draft-07/schema#","definitions":{"updateParams":{"type":"object","properties":{"id":{"type":"number"},"firstName":{"type":"string"},"surname":{"type":"string"},"dateOfBirth":{"type":"string","format":"date-time"},"message":{"type":"string"}},"required":["dateOfBirth","firstName","id","message","surname"]}}};
+export default schema.definitions;

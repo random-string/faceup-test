@@ -1,0 +1,99 @@
+<script>
+  function logout() {
+    let headers = new Headers();
+    headers.append('Authorization', 'Basic xxx');
+    fetch('/update', { method: 'POST', headers })
+      .then(() => document.querySelector('.data').innerHTML = 'Logged out');
+  }
+  function readAll() {
+    fetch('/readAll', { method: 'GET' })
+      .then(response => response.json())
+      .then(data => document.querySelector('.data').innerHTML = JSON.stringify(data));
+  }
+  function readId() {
+    fetch('/read/' + document.querySelector('#singleId').value, { method: 'GET' })
+      .then(response => response.json())
+      .then(data => document.querySelector('.data').innerHTML = JSON.stringify(data));
+  }
+  function deleteId() {
+    fetch('/delete/' + document.querySelector('#singleId').value, { method: 'POST' })
+      .then(response => {
+        if (!response.ok) return (response.text())
+        return response.json()
+      })
+      .then(data => document.querySelector('.data').innerHTML = JSON.stringify(data));
+  }
+</script>
+
+<!-- <a href="//log:out@localhost:1337">LOGOUT</a>
+
+<button onclick="logout()">logout</button>
+<p /> -->
+<button onclick="readAll()">readAll</button>
+<p />
+
+<label for="singleId">ID</label>
+<input name="id" id="singleId" value="">
+</div>
+<p />
+<button onclick="readId()">readId</button>
+<p />
+<button onclick="deleteId()">deleteId</button>
+<p />
+
+<form action="/create" method="POST" target="dummyframe">
+  <div>
+    <label for="firstName">firstName</label>
+    <input name="firstName" id="firstName" value="">
+  </div>
+  <div>
+    <label for="surname">surname</label>
+    <input name="surname" id="surname" value="">
+  </div>
+  <div>
+    <label for="dateOfBirth">date of birth</label>
+    <input type="date" name="dateOfBirth" id="dateOfBirth">
+  </div>
+  <div>
+    <label for="message">message</label>
+    <input name="message" id="message" value="">
+  </div>
+
+  <div>
+    <button>CREATE</button>
+  </div>
+</form>
+<p />
+
+
+
+<form action="/update" method="POST" target="dummyframe">
+  <div>
+    <label for="id">id</label>
+    <input name="id" id="id" value="">
+  </div>
+  <div>
+    <label for="firstName">firstName</label>
+    <input name="firstName" id="firstName" value="">
+  </div>
+  <div>
+    <label for="surname">surname</label>
+    <input name="surname" id="surname" value="">
+  </div>
+  <div>
+    <label for="dateOfBirth">date of birth</label>
+    <input type="date" name="dateOfBirth" id="dateOfBirth">
+  </div>
+  <div>
+    <label for="message">message</label>
+    <input name="message" id="message" value="">
+  </div>
+
+  <div>
+    <button>UPDATE</button>
+  </div>
+</form>
+<p />
+
+<div class="data"></div>
+<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
